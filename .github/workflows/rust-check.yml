@@ -1,6 +1,6 @@
-on: [push, pull_request]
+name: Check and Test and Lint
 
-name: Check, Test, Lint
+on: [push, pull_request]
 
 jobs:
   check:
@@ -78,3 +78,11 @@ jobs:
         with:
           command: clippy
           args: -- -D warnings
+
+  release:
+    name: Release
+    uses: ./.github/workflows/rust-build.yml
+
+  release-container:
+    name: Release Container
+    uses: ./.github/workflows/container-build.yml

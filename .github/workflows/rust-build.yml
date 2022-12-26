@@ -1,6 +1,8 @@
-on: [push, pull_request]
-
 name: Release Build and Upload
+
+on:
+  workflow_dispatch: {}
+  workflow_call:
 
 jobs:
   build:
