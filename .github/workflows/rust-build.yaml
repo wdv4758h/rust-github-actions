@@ -24,7 +24,9 @@ jobs:
       - run: |
           mkdir -p artifacts
           mv ./target/release/rust-github-actions artifacts
+          gzip -f artifacts/*
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
+          name: artifact.gz
           path: artifacts/*
