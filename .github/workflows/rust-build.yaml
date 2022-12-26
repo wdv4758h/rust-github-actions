@@ -1,0 +1,30 @@
+on: [push, pull_request]
+
+name: Continuous Integration
+
+jobs:
+  build:
+    name: Release Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          - stable
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust }}
+          override: true
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
+      - run: |
+          mkdir -p artifacts
+          mv ./target/release/rust-github-actions artifacts
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: artifacts/*
