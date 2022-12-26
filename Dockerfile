@@ -12,7 +12,7 @@ RUN mkdir -p .cargo && cargo vendor > .cargo/config
 RUN mkdir src/ && echo "fn main() {}" > src/main.rs && cargo build --bin ${PROJ} --release --target ${TRIPLE} && rm -f src/main.rs
 # get real code in
 COPY . .
-RUN touch src/main.rs && cargo build --release --bin ${PROJ} --target ${TRIPLE} --features release_max_level_debug
+RUN touch src/main.rs && cargo build --release --bin ${PROJ} --target ${TRIPLE}
 RUN strip target/${TRIPLE}/release/${PROJ}
 
 ##########
