@@ -79,8 +79,8 @@ jobs:
           command: clippy
           args: -- -D warnings
 
-  release:
-    name: Release
+  release-binary:
+    name: Release Binary
     uses: ./.github/workflows/rust-build.yml
 
   release-container:
